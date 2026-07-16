@@ -1,0 +1,173 @@
+@import 'src/app/styles/variables/colors';
+
+.creator-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  width: 100vw;
+  overflow: hidden;
+  background-color: #050505; // Slightly darker than dashboard for canvas contrast
+  color: $text-primary;
+}
+
+.creator-topbar {
+  height: 60px;
+  background: rgba(10, 10, 15, 0.9);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid $border-medium;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  z-index: 100;
+}
+
+/* Sections */
+.left-section, .center-section, .right-section {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.left-section {
+  flex: 1;
+
+  .back-btn {
+    margin-right: 8px;
+  }
+
+  .story-meta {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    h2 {
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0;
+      color: #fff;
+    }
+
+    .status {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.1);
+      
+      &.draft { color: $text-secondary; }
+    }
+
+    .saved-indicator {
+      font-size: 12px;
+      color: $text-muted;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+}
+
+.center-section {
+  justify-content: center;
+  
+  .zoom-controls {
+    display: flex;
+    align-items: center;
+    background: $bg-secondary;
+    border: 1px solid $border-medium;
+    border-radius: 20px;
+    padding: 2px;
+
+    .icon-btn {
+      width: 28px;
+      height: 28px;
+      border: none;
+      background: transparent;
+    }
+
+    .zoom-level {
+      font-size: 12px;
+      font-weight: 500;
+      width: 48px;
+      text-align: center;
+      user-select: none;
+    }
+  }
+}
+
+.right-section {
+  flex: 1;
+  justify-content: flex-end;
+
+  .divider {
+    width: 1px;
+    height: 24px;
+    background: $border-medium;
+    margin: 0 8px;
+  }
+}
+
+/* Buttons */
+.icon-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: transparent;
+  border: 1px solid transparent;
+  color: $text-secondary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $bg-secondary;
+    color: #fff;
+    border-color: $border-medium;
+  }
+}
+
+.btn-outline, .btn-primary {
+  padding: 0 16px;
+  height: 36px;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.2s;
+}
+
+.btn-outline {
+  background: transparent;
+  border: 1px solid $border-medium;
+  color: #fff;
+
+  &:hover {
+    background: rgba(255,255,255,0.05);
+    border-color: rgba(255,255,255,0.2);
+  }
+}
+
+.btn-primary {
+  background: linear-gradient(90deg, #8b5cf6, #d946ef);
+  border: none;
+  color: #fff;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+    transform: translateY(-1px);
+  }
+}
+
+/* Main Area */
+.canvas-container {
+  flex: 1;
+  position: relative;
+  overflow: hidden; /* Canvas will handle its own panning */
+}

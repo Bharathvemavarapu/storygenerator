@@ -1,0 +1,48 @@
+<div class="player-container">
+  
+  <!-- Dynamic Background Layer -->
+  <div class="dynamic-background" style="background-image: url('assets/images/story-1.png');">
+    <div class="bg-overlay"></div>
+  </div>
+
+  <!-- Narrative Content (Animated Page Flip Wrapper) -->
+  <div class="narrative-wrapper" [class.flip-animation]="isFlipping">
+    <div class="narrative-content">
+      
+      <!-- Story Text Block with Paragraph Highlighting -->
+      <div class="text-block">
+        <p *ngFor="let p of paragraphs; let i = index" 
+           [class.active]="i === currentParagraph"
+           [class.dimmed]="i !== currentParagraph"
+           (click)="currentParagraph = i">
+          {{ p }}
+        </p>
+      </div>
+
+      <!-- Choice Selection (Only visible at end of page/chapter) -->
+      <div class="choices-block" *ngIf="currentParagraph === paragraphs.length - 1">
+        <button class="choice-btn" (click)="flipPage()">
+          <div class="choice-icon"><i class="fa-solid fa-magnifying-glass"></i></div>
+          <div class="choice-text">Inspect the blinking console</div>
+        </button>
+
+        <button class="choice-btn" (click)="flipPage()">
+          <div class="choice-icon"><i class="fa-solid fa-door-closed"></i></div>
+          <div class="choice-text">Try to force the steel door open</div>
+        </button>
+
+        <button class="choice-btn text-muted" (click)="flipPage()">
+          <div class="choice-icon"><i class="fa-solid fa-hourglass"></i></div>
+          <div class="choice-text">Wait and see what happens</div>
+        </button>
+      </div>
+      
+    </div>
+  </div>
+
+  <!-- Bottom Reading Progress Bar -->
+  <div class="reading-progress-bar">
+    <div class="progress-fill" [style.width.%]="progressPercentage"></div>
+  </div>
+
+</div>

@@ -1,0 +1,15 @@
+<div class="input-group">
+  <label *ngIf="label" class="input-label">
+    {{label}} <span *ngIf="required" class="text-secondary">*</span>
+  </label>
+  <div class="input-wrapper" [class.has-icon]="icon">
+    <i *ngIf="icon" class="material-icons input-icon">{{icon}}</i>
+    <input 
+      [type]="type"
+      [placeholder]="placeholder"
+      [disabled]="disabled"
+      [value]="value"
+      (input)="onInput($event)"
+      class="glass-input" />
+  </div>
+</div>

@@ -1,0 +1,205 @@
+<div class="generator-container">
+  
+  <div class="stepper-header">
+    <div class="step" [class.active]="currentStep === 1" [class.completed]="currentStep > 1">
+      <div class="step-circle"><i class="fa-solid fa-pen"></i></div>
+      <span>Prompt</span>
+    </div>
+    <div class="step-line" [class.active]="currentStep > 1"></div>
+    
+    <div class="step" [class.active]="currentStep === 2" [class.completed]="currentStep > 2">
+      <div class="step-circle"><i class="fa-solid fa-list-ol"></i></div>
+      <span>Outline</span>
+    </div>
+    <div class="step-line" [class.active]="currentStep > 2"></div>
+    
+    <div class="step" [class.active]="currentStep === 3" [class.completed]="currentStep > 3">
+      <div class="step-circle"><i class="fa-solid fa-users"></i></div>
+      <span>Cast</span>
+    </div>
+    <div class="step-line" [class.active]="currentStep > 3"></div>
+    
+    <div class="step" [class.active]="currentStep === 4" [class.completed]="currentStep > 4">
+      <div class="step-circle"><i class="fa-solid fa-image"></i></div>
+      <span>Visuals</span>
+    </div>
+    <div class="step-line" [class.active]="currentStep > 4"></div>
+    
+    <div class="step" [class.active]="currentStep === 5" [class.completed]="currentStep > 5">
+      <div class="step-circle"><i class="fa-solid fa-microphone"></i></div>
+      <span>Audio</span>
+    </div>
+  </div>
+
+  <div class="generator-content glass-card">
+    
+    <!-- Step 1: Initial Prompt & Engine Selection -->
+    <div class="step-panel" *ngIf="currentStep === 1">
+      <h2>What kind of story do you want to tell?</h2>
+      <p>Enter a prompt, genre, or specific idea. The AI will flesh out a complete narrative.</p>
+      <textarea class="prompt-input" placeholder="e.g. A cyberpunk detective investigates a series of memory thefts in Neon City..."></textarea>
+      
+      <div class="engine-selection mt-8">
+        <h3 class="mb-4">Select AI Generation Engine</h3>
+        <div class="engine-grid">
+          <div class="engine-card" [class.active]="activeEngine === 'squibler'" (click)="selectEngine('squibler')">
+            <div class="engine-icon"><i class="fa-solid fa-pen-nib text-purple"></i></div>
+            <div class="engine-info">
+              <h4>Squibler</h4>
+              <p>Robust tool that builds complete narrative structures, character arcs, and full-length scripts from a one-line premise.</p>
+            </div>
+            <div class="engine-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <div class="engine-card" [class.active]="activeEngine === 'flixier'" (click)="selectEngine('flixier')">
+            <div class="engine-icon"><i class="fa-solid fa-video text-blue"></i></div>
+            <div class="engine-info">
+              <h4>Flixier</h4>
+              <p>Excellent for drafting video concepts, generating story scripts, and organizing the foundational plot structure.</p>
+            </div>
+            <div class="engine-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+
+          <div class="engine-card" [class.active]="activeEngine === 'quillbot'" (click)="selectEngine('quillbot')">
+            <div class="engine-icon"><i class="fa-solid fa-feather-pointed text-green"></i></div>
+            <div class="engine-info">
+              <h4>QuillBot AI</h4>
+              <p>A straightforward writing assistant ideal for drafting themes and shaping rough ideas into compelling story prompts.</p>
+            </div>
+            <div class="engine-check"><i class="fa-solid fa-circle-check"></i></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel-actions mt-8">
+        <button class="btn-primary-large" (click)="simulateGeneration()" [disabled]="isGenerating">
+          <span *ngIf="!isGenerating">Generate Outline <i class="fa-solid fa-wand-magic-sparkles ml-2"></i></span>
+          <span *ngIf="isGenerating"><i class="fa-solid fa-circle-notch fa-spin"></i> Synthesizing...</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 2: Outline & Chapters -->
+    <div class="step-panel" *ngIf="currentStep === 2">
+      <h2>Review Outline</h2>
+      <p>Here is the AI-generated story structure. Edit anything before we generate the full text.</p>
+      
+      <div class="chapters-list">
+        <div class="chapter-item">
+          <h4>Chapter 1: The Glitch</h4>
+          <p>Detective Kael investigates a rogue android in Sector 4.</p>
+        </div>
+        <div class="chapter-item">
+          <h4>Chapter 2: Neon Shadows</h4>
+          <p>Kael uncovers a conspiracy linking the android to the MegaCorp.</p>
+        </div>
+      </div>
+      
+      <div class="panel-actions split">
+        <button class="btn-secondary" (click)="prevStep()">Back</button>
+        <button class="btn-primary-large" (click)="simulateGeneration()" [disabled]="isGenerating">
+          <span *ngIf="!isGenerating">Generate Cast</span>
+          <span *ngIf="isGenerating"><i class="fa-solid fa-circle-notch fa-spin"></i> Writing...</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 3: Characters & Profiles -->
+    <div class="step-panel" *ngIf="currentStep === 3">
+      <h2>Character Profiles</h2>
+      <p>The AI has generated the main cast based on the outline.</p>
+      
+      <div class="cast-grid">
+        <div class="cast-card">
+          <div class="cast-avatar"><i class="fa-solid fa-user-astronaut"></i></div>
+          <div class="cast-info">
+            <h4>Detective Kael</h4>
+            <span class="role">Protagonist</span>
+          </div>
+        </div>
+        <div class="cast-card">
+          <div class="cast-avatar"><i class="fa-solid fa-robot"></i></div>
+          <div class="cast-info">
+            <h4>Unit 7</h4>
+            <span class="role">Rogue AI</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="panel-actions split">
+        <button class="btn-secondary" (click)="prevStep()">Back</button>
+        <button class="btn-primary-large" (click)="simulateGeneration()" [disabled]="isGenerating">
+          <span *ngIf="!isGenerating">Generate Visuals</span>
+          <span *ngIf="isGenerating"><i class="fa-solid fa-circle-notch fa-spin"></i> Rendering...</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 4: Visuals & Images -->
+    <div class="step-panel" *ngIf="currentStep === 4">
+      <h2>Visual Generation</h2>
+      <p>Select what types of AI images you want to generate for this story.</p>
+      
+      <div class="visuals-toggles">
+        <label class="toggle-row">
+          <div class="toggle-info">
+            <h4>Character Portraits</h4>
+            <p>Generate consistent faces for the cast.</p>
+          </div>
+          <input type="checkbox" checked>
+        </label>
+        
+        <label class="toggle-row">
+          <div class="toggle-info">
+            <h4>Chapter Landscapes</h4>
+            <p>Beautiful establishing shots for each chapter.</p>
+          </div>
+          <input type="checkbox" checked>
+        </label>
+
+        <label class="toggle-row">
+          <div class="toggle-info">
+            <h4>Magic & Action Effects</h4>
+            <p>Dynamic illustrations of key action sequences.</p>
+          </div>
+          <input type="checkbox">
+        </label>
+      </div>
+      
+      <div class="panel-actions split">
+        <button class="btn-secondary" (click)="prevStep()">Back</button>
+        <button class="btn-primary-large" (click)="simulateGeneration()" [disabled]="isGenerating">
+          <span *ngIf="!isGenerating">Generate Audio</span>
+          <span *ngIf="isGenerating"><i class="fa-solid fa-circle-notch fa-spin"></i> Processing...</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Step 5: Audio & Publish -->
+    <div class="step-panel" *ngIf="currentStep === 5">
+      <h2>Audio & Narration</h2>
+      <p>Configure voice generation and background ambiance.</p>
+      
+      <div class="audio-selection">
+        <div class="voice-card active">
+          <i class="fa-solid fa-microphone-lines"></i>
+          <h4>Cinematic Male</h4>
+          <span>Deep, raspy</span>
+        </div>
+        <div class="voice-card">
+          <i class="fa-solid fa-microphone-lines"></i>
+          <h4>Narrator Female</h4>
+          <span>Calm, clear</span>
+        </div>
+      </div>
+      
+      <div class="panel-actions split mt-4">
+        <button class="btn-secondary" (click)="prevStep()">Back</button>
+        <button class="btn-success-large" routerLink="/storyboard">
+          Complete & Open Editor <i class="fa-solid fa-check ml-2"></i>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,206 @@
+<div class="dashboard-overview">
+  
+  <header class="overview-header">
+    <div class="welcome-text">
+      <h1>Welcome back, Creator! 👋</h1>
+      <p>Here's what's happening with your stories today.</p>
+    </div>
+    
+    <div class="gamification-header">
+      <div class="streak-badge">
+        <i class="fa-solid fa-fire"></i>
+        <span>14 Day Streak!</span>
+      </div>
+      <div class="xp-bar-container">
+        <div class="xp-meta">
+          <span>Level 12 Storyteller</span>
+          <span>450 / 1000 XP</span>
+        </div>
+        <div class="xp-bar">
+          <div class="xp-fill" style="width: 45%;"></div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="dashboard-grid">
+    <!-- Left Column (Main Content) -->
+    <div class="main-column">
+      <section class="stats-grid">
+        <div class="stat-card glass-card">
+          <div class="stat-icon bg-purple"><i class="fa-solid fa-book"></i></div>
+          <div class="stat-content">
+            <h3>12</h3>
+            <p>Total Stories</p>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-card">
+          <div class="stat-icon bg-pink"><i class="fa-solid fa-eye"></i></div>
+          <div class="stat-content">
+            <h3>45.2K</h3>
+            <p>Total Views</p>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-card">
+          <div class="stat-icon bg-blue"><i class="fa-solid fa-pen-nib"></i></div>
+          <div class="stat-content">
+            <h3>128K</h3>
+            <p>Words Generated</p>
+          </div>
+        </div>
+        
+        <div class="stat-card glass-card">
+          <div class="stat-icon bg-orange"><i class="fa-solid fa-microchip"></i></div>
+          <div class="stat-content">
+            <h3>8.5K</h3>
+            <p>Tokens Used</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Usage Graph Simulation -->
+      <section class="usage-graph-section glass-card mt-4">
+        <div class="section-header">
+          <h2>AI Generation Activity</h2>
+          <select class="graph-select">
+            <option>This Week</option>
+            <option>This Month</option>
+          </select>
+        </div>
+        
+        <div class="mock-chart">
+          <!-- Simulated Bar Chart -->
+          <div class="chart-bar"><div class="fill" style="height: 40%"></div><span>Mon</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 70%"></div><span>Tue</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 20%"></div><span>Wed</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 90%"></div><span>Thu</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 60%"></div><span>Fri</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 80%"></div><span>Sat</span></div>
+          <div class="chart-bar"><div class="fill" style="height: 50%"></div><span>Sun</span></div>
+        </div>
+      </section>
+
+      <section class="recent-stories-section mt-4">
+        <div class="section-header">
+          <h2>Recent Stories</h2>
+          <a routerLink="/stories" class="view-all">View All</a>
+        </div>
+        
+        <div class="recent-grid">
+          <!-- Story Card 1 -->
+          <div class="story-card glass-card">
+            <div class="story-img">
+              <img src="assets/images/story-1.png" alt="The Lost Kingdom">
+              <div class="status-badge draft">Draft</div>
+            </div>
+            <div class="story-info">
+              <h4>The Lost Kingdom</h4>
+              <p class="updated">Last updated 2 hours ago</p>
+              <div class="progress-bar">
+                <div class="progress" style="width: 45%;"></div>
+              </div>
+              <p class="progress-text">45% Complete</p>
+              <div class="card-actions">
+                <button class="btn-outline-small" routerLink="/storyboard">Continue Editing</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Story Card 2 -->
+          <div class="story-card glass-card">
+            <div class="story-img">
+              <img src="assets/images/story-1.png" alt="Cyber City 2099">
+              <div class="status-badge published">Published</div>
+            </div>
+            <div class="story-info">
+              <h4>Cyber City 2099</h4>
+              <p class="updated">Last updated 2 days ago</p>
+              <div class="metrics">
+                <span><i class="fa-solid fa-eye"></i> 12K</span>
+                <span><i class="fa-solid fa-heart"></i> 4.5K</span>
+              </div>
+              <div class="card-actions">
+                <button class="btn-outline-small">View Stats</button>
+              </div>
+            </div>
+          </div>
+          
+          <!-- New Story Card -->
+          <div class="story-card glass-card new-story-card" routerLink="/storyboard">
+            <div class="new-content">
+              <div class="icon-circle">
+                <i class="fa-solid fa-plus"></i>
+              </div>
+              <h4>Create New Story</h4>
+              <p>Start a new AI-powered adventure</p>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Right Column (Sidebar Widgets) -->
+    <div class="side-column">
+      <!-- Subscription / Credits Widget -->
+      <div class="widget-card glass-card premium-widget">
+        <div class="widget-header">
+          <h3><i class="fa-solid fa-crown text-yellow"></i> Premium Plan</h3>
+          <span class="badge active">Active</span>
+        </div>
+        <div class="credits-circle">
+          <svg viewBox="0 0 36 36" class="circular-chart">
+            <path class="circle-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <path class="circle" stroke-dasharray="80, 100" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+            <text x="18" y="16.5" class="percentage">80%</text>
+            <text x="18" y="22" class="subtext">Tokens Left</text>
+          </svg>
+        </div>
+        <div class="credits-details">
+          <div class="detail-row">
+            <span>Monthly AI Images</span>
+            <span>450 / 500</span>
+          </div>
+          <div class="detail-row">
+            <span>Voice Generation</span>
+            <span>Unlimited</span>
+          </div>
+        </div>
+        <button class="btn-primary-full mt-3">Upgrade to Enterprise</button>
+      </div>
+
+      <!-- Achievements Widget -->
+      <div class="widget-card glass-card achievements-widget mt-4">
+        <div class="widget-header">
+          <h3>Recent Achievements</h3>
+          <a href="#" class="view-all">All Badges</a>
+        </div>
+        <div class="achievements-list">
+          <div class="achievement-item">
+            <div class="ach-icon bg-gold"><i class="fa-solid fa-trophy"></i></div>
+            <div class="ach-info">
+              <h4>Bestseller</h4>
+              <p>Reach 10,000 total views</p>
+            </div>
+          </div>
+          <div class="achievement-item">
+            <div class="ach-icon bg-silver"><i class="fa-solid fa-pen-fancy"></i></div>
+            <div class="ach-info">
+              <h4>Prolific Writer</h4>
+              <p>Publish 5 complete stories</p>
+            </div>
+          </div>
+          <div class="achievement-item locked">
+            <div class="ach-icon"><i class="fa-solid fa-lock"></i></div>
+            <div class="ach-info">
+              <h4>Master of AI</h4>
+              <p>Generate 1,000 images</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

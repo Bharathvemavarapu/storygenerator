@@ -1,0 +1,36 @@
+<div class="creator-layout">
+  <!-- Creator Topbar -->
+  <header class="creator-topbar">
+    <div class="left-section">
+      <button class="icon-btn back-btn" routerLink="/dashboard" title="Back to Dashboard">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="story-meta">
+        <span class="status draft">Draft</span>
+        <h2>Untitled Story</h2>
+        <span class="saved-indicator"><i class="fa-solid fa-cloud-check"></i> Saved just now</span>
+      </div>
+    </div>
+    
+    <div class="center-section">
+      <div class="zoom-controls">
+        <button class="icon-btn"><i class="fa-solid fa-minus"></i></button>
+        <span class="zoom-level">100%</span>
+        <button class="icon-btn"><i class="fa-solid fa-plus"></i></button>
+      </div>
+    </div>
+
+    <div class="right-section">
+      <button class="icon-btn" title="Undo"><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="icon-btn" title="Redo"><i class="fa-solid fa-rotate-right"></i></button>
+      <div class="divider"></div>
+      <button class="btn-outline"><i class="fa-solid fa-play"></i> Test Play</button>
+      <button class="btn-primary">Publish</button>
+    </div>
+  </header>
+
+  <!-- Canvas Container -->
+  <main class="canvas-container">
+    <router-outlet></router-outlet>
+  </main>
+</div>

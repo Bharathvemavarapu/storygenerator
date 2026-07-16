@@ -1,0 +1,41 @@
+<!-- Floating Action Button -->
+<button class="assistant-fab" (click)="toggleAssistant()" [class.active]="isOpen">
+  <i class="fa-solid fa-wand-magic-sparkles" *ngIf="!isOpen"></i>
+  <i class="fa-solid fa-xmark" *ngIf="isOpen"></i>
+</button>
+
+<!-- Chat Window -->
+<div class="assistant-window glass-card" [class.open]="isOpen">
+  <div class="assistant-header">
+    <div class="ai-avatar">
+      <i class="fa-solid fa-robot"></i>
+    </div>
+    <div class="ai-info">
+      <h4>Storyverse AI</h4>
+      <span class="status">Online</span>
+    </div>
+  </div>
+
+  <div class="chat-area">
+    <div class="message" *ngFor="let msg of messages" [class.user]="msg.sender === 'user'" [class.ai]="msg.sender === 'ai'">
+      <div class="bubble">{{ msg.text }}</div>
+    </div>
+      
+    <!-- Typing Indicator -->
+    <div class="message ai-message" *ngIf="isLoading">
+      <div class="bubble typing-indicator">
+        <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="suggestions">
+    <button class="suggestion-chip">Fix Grammar</button>
+    <button class="suggestion-chip">Add Suspense</button>
+  </div>
+
+  <div class="input-area">
+    <input type="text" placeholder="Ask AI to write, edit, or brainstorm..." [(ngModel)]="userInput" (keyup.enter)="sendMessage()">
+    <button class="send-btn" (click)="sendMessage()"><i class="fa-solid fa-paper-plane"></i></button>
+  </div>
+</div>

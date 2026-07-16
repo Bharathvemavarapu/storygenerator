@@ -1,0 +1,76 @@
+<div class="admin-layout">
+  
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <div class="logo">
+        <div class="logo-icon"><i class="fa-solid fa-star"></i></div>
+        <span class="logo-text">StoryVerse</span>
+        <span class="logo-ai">AI</span>
+      </div>
+    </div>
+    
+    <nav class="sidebar-nav">
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-border-all"></i> Dashboard
+      </a>
+      <a routerLink="/stories" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-book-open"></i> My Stories
+      </a>
+      <a routerLink="/community" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-users"></i> Community
+      </a>
+      <a routerLink="/analytics" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-chart-line"></i> Analytics
+      </a>
+      <a routerLink="/settings" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-gear"></i> Settings
+      </a>
+      <a routerLink="/admin" routerLinkActive="active" class="nav-item">
+        <i class="fa-solid fa-shield-halved"></i> Admin
+      </a>
+    </nav>
+    
+    <div class="sidebar-footer" *ngIf="user$ | async as user">
+      <div class="user-card">
+        <div class="avatar">
+          <img [src]="'https://ui-avatars.com/api/?name=' + (user.displayName || user.email) + '&background=8b5cf6&color=fff'" alt="User Avatar">
+        </div>
+        <div class="user-info">
+          <span class="name" style="max-width: 100px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">
+            {{ user.displayName || user.email }}
+          </span>
+          <span class="plan">Pro Member</span>
+        </div>
+      </div>
+      <button class="logout-btn" (click)="logout()" title="Logout">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-wrapper">
+    <!-- Topbar -->
+    <header class="topbar">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input type="text" placeholder="Search stories, characters, or assets...">
+      </div>
+      
+      <div class="topbar-actions">
+        <button class="icon-btn"><i class="fa-solid fa-bell"></i></button>
+        <button class="btn-primary" routerLink="/storyboard/new">
+          <i class="fa-solid fa-plus"></i> New Story
+        </button>
+      </div>
+    </header>
+
+    <!-- Page Content (Injected by Router) -->
+    <div class="page-content">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+  
+  <app-ai-assistant></app-ai-assistant>
+</div>

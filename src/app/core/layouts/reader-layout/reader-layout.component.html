@@ -1,0 +1,46 @@
+<div class="reader-layout">
+  
+  <!-- Auto-hiding HUD Navigation -->
+  <nav class="reader-hud" [class.hud-hidden]="isHidden">
+    <div class="left-controls">
+      <button class="icon-btn" routerLink="/dashboard" title="Exit to Dashboard">
+        <i class="fa-solid fa-arrow-left"></i>
+      </button>
+      <div class="story-info">
+        <span class="series">The Awakening</span>
+        <span class="chapter">Chapter 1: The Machine</span>
+      </div>
+    </div>
+    
+    <!-- Audio Waveform Animation (Visible when playing) -->
+    <div class="audio-visualizer" *ngIf="isPlaying">
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+      <div class="bar"></div>
+    </div>
+
+    <div class="right-controls">
+      <!-- Mute/Unmute -->
+      <button class="icon-btn" (click)="toggleMute()" [title]="isMuted ? 'Unmute' : 'Mute'">
+        <i class="fa-solid" [class.fa-volume-high]="!isMuted" [class.fa-volume-xmark]="isMuted"></i>
+      </button>
+      
+      <!-- Auto-Play Voice -->
+      <button class="icon-btn primary-action" (click)="togglePlay()" [title]="isPlaying ? 'Pause Narration' : 'Start Narration'">
+        <i class="fa-solid" [class.fa-play]="!isPlaying" [class.fa-pause]="isPlaying"></i>
+      </button>
+
+      <div class="divider"></div>
+
+      <button class="icon-btn" title="Text Settings"><i class="fa-solid fa-font"></i></button>
+      <button class="icon-btn" title="Save Bookmark"><i class="fa-solid fa-bookmark"></i></button>
+    </div>
+  </nav>
+
+  <!-- Interactive Story Content (Injected by Router) -->
+  <main class="story-viewport" (mousemove)="onMouseMove()">
+    <router-outlet></router-outlet>
+  </main>
+</div>

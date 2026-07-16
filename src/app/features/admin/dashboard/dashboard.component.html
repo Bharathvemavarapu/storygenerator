@@ -1,0 +1,120 @@
+<div class="admin-dashboard">
+  <div class="header">
+    <h1>System Administration</h1>
+    <p>Monitor platform health, manage users, and moderate content.</p>
+  </div>
+
+  <!-- System Health Widgets -->
+  <div class="health-grid">
+    <div class="stat-card glass-card">
+      <div class="icon bg-success"><i class="fa-solid fa-server"></i></div>
+      <div class="info">
+        <h3>{{ uptime }}</h3>
+        <span>System Uptime</span>
+      </div>
+    </div>
+    
+    <div class="stat-card glass-card">
+      <div class="icon bg-primary"><i class="fa-solid fa-users"></i></div>
+      <div class="info">
+        <h3>{{ activeUsers }}</h3>
+        <span>Active Users (24h)</span>
+      </div>
+    </div>
+    
+    <div class="stat-card glass-card">
+      <div class="icon bg-warning"><i class="fa-solid fa-bolt"></i></div>
+      <div class="info">
+        <h3>{{ apiCalls }}</h3>
+        <span>AI API Calls</span>
+      </div>
+    </div>
+    
+    <div class="stat-card glass-card">
+      <div class="icon" [class.bg-danger]="serverLoad > 80" [class.bg-success]="serverLoad <= 80">
+        <i class="fa-solid fa-microchip"></i>
+      </div>
+      <div class="info">
+        <h3>{{ serverLoad }}%</h3>
+        <span>Avg Server Load</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-main-grid">
+    <!-- User Management Table -->
+    <div class="admin-section glass-card">
+      <div class="section-header">
+        <h2>User Management</h2>
+        <button class="btn-outline-small">View All Users</button>
+      </div>
+      
+      <div class="table-container">
+        <table class="admin-table">
+          <thead>
+            <tr>
+              <th>User ID</th>
+              <th>Name</th>
+              <th>Role</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+              <td class="font-mono text-muted">{{ user.id }}</td>
+              <td class="font-bold">{{ user.name }}</td>
+              <td><span class="badge role-badge">{{ user.role }}</span></td>
+              <td>
+                <span class="badge status-badge" 
+                      [class.active]="user.status === 'Active'"
+                      [class.suspended]="user.status === 'Suspended'"
+                      [class.banned]="user.status === 'Banned'">
+                  {{ user.status }}
+                </span>
+              </td>
+              <td>
+                <button class="action-btn text-danger" (click)="banUser(user.id)" title="Ban User" *ngIf="user.status !== 'Banned'">
+                  <i class="fa-solid fa-ban"></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Content Moderation Queue -->
+    <div class="admin-section glass-card">
+      <div class="section-header">
+        <h2>Content Moderation</h2>
+        <span class="badge danger-badge">{{ flaggedContent.length }} Pending</span>
+      </div>
+      
+      <div class="moderation-queue">
+        <div class="empty-state" *ngIf="flaggedContent.length === 0">
+          <i class="fa-solid fa-check-circle text-success"></i>
+          <p>Queue is empty. Great job!</p>
+        </div>
+
+        <div class="mod-card" *ngFor="let content of flaggedContent">
+          <div class="mod-info">
+            <h4 class="font-bold">{{ content.title }}</h4>
+            <div class="mod-meta">
+              <span class="reason"><i class="fa-solid fa-flag"></i> {{ content.reason }}</span>
+              <span class="reporter">Reported by: {{ content.reporter }}</span>
+            </div>
+          </div>
+          <div class="mod-actions">
+            <button class="btn-success-small" (click)="approveContent(content.id)" title="Approve">
+              <i class="fa-solid fa-check"></i>
+            </button>
+            <button class="btn-danger-small" (click)="rejectContent(content.id)" title="Takedown">
+              <i class="fa-solid fa-trash-can"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

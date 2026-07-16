@@ -1,0 +1,28 @@
+<nav class="main-nav">
+  <div class="nav-container">
+    <div class="logo">
+      <div class="logo-icon">
+        <i class="fa-solid fa-star"></i>
+      </div>
+      <span class="logo-text">StoryVerse</span>
+      <span class="logo-ai">AI</span>
+    </div>
+
+    <ul class="nav-links" [class.open]="isMenuOpen">
+      <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a></li>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#how-it-works">How It Works</a></li>
+      <li><a href="#explore">Explore</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+
+    <div class="nav-actions">
+      <a routerLink="/auth/login" class="btn-ghost">Log In</a>
+      <a routerLink="/auth/register" class="btn-primary">Sign Up</a>
+      <button class="mobile-menu-btn" (click)="toggleMenu()">
+        <i class="fa-solid" [class.fa-bars]="!isMenuOpen" [class.fa-times]="isMenuOpen"></i>
+      </button>
+    </div>
+  </div>
+</nav>

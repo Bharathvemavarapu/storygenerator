@@ -1,0 +1,136 @@
+<div class="node-engine-workspace">
+  <!-- Top Bar: Zoom Controls & Project Info -->
+  <header class="canvas-topbar">
+    <div class="project-info">
+      <button class="icon-btn" routerLink="/dashboard"><i class="fa-solid fa-arrow-left"></i></button>
+      <span class="badge draft">Draft</span>
+      <h2>Untitled Story</h2>
+      <span class="status-text text-muted">Saved just now</span>
+    </div>
+
+    <div class="canvas-controls">
+      <button class="zoom-btn" (click)="zoomOut()"><i class="fa-solid fa-minus"></i></button>
+      <span>{{ (zoom * 100) | number:'1.0-0' }}%</span>
+      <button class="zoom-btn" (click)="zoomIn()"><i class="fa-solid fa-plus"></i></button>
+    </div>
+
+    <div class="actions">
+      <button class="icon-btn"><i class="fa-solid fa-rotate-left"></i></button>
+      <button class="icon-btn"><i class="fa-solid fa-rotate-right"></i></button>
+      <div class="divider"></div>
+      <button class="btn-outline"><i class="fa-solid fa-play"></i> Test Play</button>
+      <button class="btn-primary">Publish</button>
+    </div>
+  </header>
+
+  <!-- Toolbox -->
+  <aside class="canvas-toolbox">
+    <div class="tool-group">
+      <button class="tool-btn active" title="Select (V)"><i class="fa-solid fa-arrow-pointer"></i></button>
+      <button class="tool-btn" title="Add Node (N)"><i class="fa-solid fa-square-plus"></i></button>
+      <button class="tool-btn" title="Add Connection (C)"><i class="fa-solid fa-bezier-curve"></i></button>
+      <button class="tool-btn" title="Pan (Space)"><i class="fa-solid fa-hand"></i></button>
+    </div>
+    
+    <div class="tool-group bottom">
+      <button class="tool-btn" title="Canvas Settings"><i class="fa-solid fa-sliders"></i></button>
+    </div>
+  </aside>
+
+  <!-- The Canvas Area -->
+  <div class="canvas-area" 
+       [class.panning]="isPanning" 
+       (mousedown)="onCanvasMouseDown($event)">
+    
+    <!-- Panning & Zooming Wrapper -->
+    <div class="canvas-wrapper" 
+         [style.transform]="'translate(' + canvasX + 'px, ' + canvasY + 'px) scale(' + zoom + ')'">
+      
+      <!-- Grid Background -->
+      <div class="canvas-bg"></div>
+      
+      <!-- SVG Connections Layer -->
+      <svg class="connections-layer" width="10000" height="10000">
+        <g *ngFor="let conn of getConnections()">
+          <path [attr.d]="conn.d" class="connection-line" />
+          <circle [attr.cx]="conn.cx" [attr.cy]="conn.cy" r="4" class="connection-dot" />
+        </g>
+      </svg>
+
+      <!-- Dynamic Nodes -->
+      <div *ngFor="let node of nodes" 
+           class="node-card" 
+           [class.selected]="selectedNode?.id === node.id"
+           [class.root-node]="node.isRoot"
+           [style.left.px]="node.x" 
+           [style.top.px]="node.y"
+           (mousedown)="selectNode(node, $event)">
+        
+        <!-- Node Header (Draggable) -->
+        <div class="node-header" (mousedown)="onNodeMouseDown(node, $event)" style="cursor: grab;">
+          <div class="node-icon" [ngClass]="node.iconColor || 'text-muted'">
+            <i class="fa-solid" [ngClass]="node.icon || 'fa-file'"></i>
+          </div>
+          <span class="node-title">{{ node.title }}</span>
+          <button class="node-menu"><i class="fa-solid fa-ellipsis"></i></button>
+        </div>
+
+        <!-- Node Body -->
+        <div class="node-body">
+          <div *ngIf="node.image" class="node-image" [style.background-image]="'url(' + node.image + ')'"></div>
+          
+          <div *ngIf="node.isGenerating" class="ai-generating">
+            <i class="fa-solid fa-sparkles fa-bounce"></i>
+            <span>AI is generating continuation...</span>
+          </div>
+          
+          <p *ngIf="!node.isGenerating" class="node-excerpt">{{ node.content | slice:0:100 }}{{ node.content.length > 100 ? '...' : '' }}</p>
+        </div>
+
+        <!-- Node Footer / Ports -->
+        <div class="node-footer">
+          <!-- Input Port (if not root) -->
+          <div *ngIf="!node.isRoot" class="port input-port">
+            <div class="port-socket connected"></div>
+          </div>
+          
+          <!-- Output Ports -->
+          <div *ngFor="let port of node.outputs" class="port output-port" [class.empty]="!port.connectedTo">
+            <span>{{ port.label }}</span>
+            <div class="port-socket" [class.connected]="!!port.connectedTo"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Properties Sidebar (Slide-out) -->
+  <aside class="properties-panel" [class.open]="!!selectedNode">
+    <div class="panel-header" *ngIf="selectedNode">
+      <h3>Node Properties</h3>
+      <button class="icon-btn" (click)="closePanel()"><i class="fa-solid fa-xmark"></i></button>
+    </div>
+    
+    <div class="panel-content" *ngIf="selectedNode">
+      <div class="form-group">
+        <label>Node Title</label>
+        <input type="text" [(ngModel)]="selectedNode.title" class="prop-input">
+      </div>
+      
+      <div class="form-group">
+        <label>Story Content</label>
+        <textarea class="prop-textarea" rows="6" [(ngModel)]="selectedNode.content"></textarea>
+        <button class="btn-ai-assist"><i class="fa-solid fa-wand-magic-sparkles"></i> Expand with AI</button>
+      </div>
+
+      <div class="form-group" *ngIf="selectedNode.image">
+        <label>Scene Image</label>
+        <div class="image-generator-box">
+          <img [src]="selectedNode.image" alt="Generated scene">
+          <button class="btn-outline-small">Regenerate</button>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+</div>

@@ -1,0 +1,62 @@
+<div class="auth-header">
+  <h2>Create Account</h2>
+  <p>Join Storyverse AI today</p>
+</div>
+
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="auth-form">
+  <div *ngIf="errorMessage" class="error-banner">
+    {{ errorMessage }}
+  </div>
+  <div class="form-group">
+    <label for="username">Username</label>
+    <div class="input-wrapper" [class.error]="f['username'].invalid && (f['username'].dirty || f['username'].touched)">
+      <i class="fa-solid fa-user"></i>
+      <input type="text" id="username" formControlName="username" placeholder="Choose a username" />
+    </div>
+    <div *ngIf="f['username'].invalid && (f['username'].dirty || f['username'].touched)" class="error-message">
+      Username must be at least 3 characters.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email Address</label>
+    <div class="input-wrapper" [class.error]="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+      <i class="fa-solid fa-envelope"></i>
+      <input type="email" id="email" formControlName="email" placeholder="name@example.com" />
+    </div>
+    <div *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)" class="error-message">
+      Please enter a valid email address.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="password">Password</label>
+    <div class="input-wrapper" [class.error]="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+      <i class="fa-solid fa-lock"></i>
+      <input type="password" id="password" formControlName="password" placeholder="Create a password" />
+    </div>
+    <div *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)" class="error-message">
+      Password must be at least 8 characters.
+    </div>
+  </div>
+
+  <div class="form-group">
+    <label for="confirmPassword">Confirm Password</label>
+    <div class="input-wrapper" [class.error]="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)">
+      <i class="fa-solid fa-shield"></i>
+      <input type="password" id="confirmPassword" formControlName="confirmPassword" placeholder="Confirm your password" />
+    </div>
+    <div *ngIf="f['confirmPassword'].errors?.['mismatch'] && (f['confirmPassword'].dirty || f['confirmPassword'].touched)" class="error-message">
+      Passwords do not match.
+    </div>
+  </div>
+
+  <button type="submit" class="btn-primary" [disabled]="isSubmitting">
+    <span *ngIf="!isSubmitting">Sign Up</span>
+    <span *ngIf="isSubmitting" class="spinner"><i class="fa-solid fa-circle-notch fa-spin"></i></span>
+  </button>
+</form>
+
+<div class="auth-footer">
+  <p>Already have an account? <a routerLink="/auth/login">Sign in</a></p>
+</div>

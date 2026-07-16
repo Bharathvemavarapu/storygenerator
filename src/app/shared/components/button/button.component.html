@@ -1,0 +1,10 @@
+<button 
+  [type]="type"
+  [class]="'btn btn-' + variant"
+  [class.btn-block]="block"
+  [disabled]="disabled"
+  (click)="handleClick($event)">
+  <i *ngIf="icon" class="material-icons btn-icon">{{icon}}</i>
+  <span>{{label}}</span>
+  <ng-content></ng-content>
+</button>

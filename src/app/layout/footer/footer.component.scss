@@ -1,0 +1,131 @@
+@import 'src/app/styles/variables/colors';
+
+.main-footer {
+  background-color: #050508;
+  padding: 60px 0 20px;
+  border-top: 1px solid rgba(255,255,255,0.05);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-grid {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 40px;
+}
+
+.footer-brand {
+  max-width: 300px;
+
+  .logo {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px;
+    font-weight: 700;
+    margin-bottom: 16px;
+
+    .logo-icon {
+      color: #facc15;
+      font-size: 20px;
+    }
+    .logo-text { color: #fff; }
+    .logo-ai {
+      background: #8b5cf6;
+      color: #fff;
+      font-size: 14px;
+      padding: 2px 6px;
+      border-radius: 6px;
+    }
+  }
+
+  .brand-desc {
+    color: $text-secondary;
+    font-size: 14px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .social-links {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+
+    a {
+      color: $text-secondary;
+      font-size: 20px;
+      transition: color 0.2s;
+
+      &:hover { color: #fff; }
+    }
+  }
+
+  .copyright {
+    color: rgba(255,255,255,0.3);
+    font-size: 12px;
+  }
+}
+
+.footer-links {
+  display: flex;
+  gap: 60px;
+  flex: 1;
+  justify-content: center;
+
+  .link-column {
+    h4 {
+      color: #fff;
+      font-size: 16px;
+      font-weight: 600;
+      margin: 0 0 20px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+
+      a {
+        color: $text-secondary;
+        font-size: 14px;
+        transition: color 0.2s;
+
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
+}
+
+.footer-art {
+  width: 200px;
+  display: flex;
+  align-items: flex-end;
+
+  img {
+    width: 100%;
+    border-radius: 12px;
+    mask-image: linear-gradient(to top, black 50%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to top, black 50%, transparent 100%);
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-links {
+    flex-direction: column;
+    gap: 30px;
+    justify-content: flex-start;
+  }
+  .footer-art {
+    display: none;
+  }
+}
