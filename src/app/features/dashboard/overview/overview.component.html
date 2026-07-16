@@ -89,41 +89,37 @@
         </div>
         
         <div class="recent-grid">
-          <!-- Story Card 1 -->
-          <div class="story-card glass-card">
+          <!-- Dynamic Story Cards -->
+          <div class="story-card glass-card" *ngFor="let story of recentStories">
             <div class="story-img">
-              <img src="assets/images/story-1.png" alt="The Lost Kingdom">
-              <div class="status-badge draft">Draft</div>
+              <img [src]="story.coverImage" [alt]="story.title">
+              <div class="status-badge" [ngClass]="story.status">{{ story.status === 'draft' ? 'Draft' : 'Published' }}</div>
             </div>
             <div class="story-info">
-              <h4>The Lost Kingdom</h4>
-              <p class="updated">Last updated 2 hours ago</p>
-              <div class="progress-bar">
-                <div class="progress" style="width: 45%;"></div>
-              </div>
-              <p class="progress-text">45% Complete</p>
-              <div class="card-actions">
-                <button class="btn-outline-small" routerLink="/storyboard">Continue Editing</button>
-              </div>
-            </div>
-          </div>
+              <h4>{{ story.title }}</h4>
+              <p class="updated">{{ story.updatedAt }}</p>
+              
+              <!-- Draft Info -->
+              <ng-container *ngIf="story.status === 'draft'">
+                <div class="progress-bar">
+                  <div class="progress" [style.width.%]="story.progress"></div>
+                </div>
+                <p class="progress-text">{{ story.progress }}% Complete</p>
+                <div class="card-actions">
+                  <button class="btn-outline-small" routerLink="/storyboard">Continue Editing</button>
+                </div>
+              </ng-container>
 
-          <!-- Story Card 2 -->
-          <div class="story-card glass-card">
-            <div class="story-img">
-              <img src="assets/images/story-1.png" alt="Cyber City 2099">
-              <div class="status-badge published">Published</div>
-            </div>
-            <div class="story-info">
-              <h4>Cyber City 2099</h4>
-              <p class="updated">Last updated 2 days ago</p>
-              <div class="metrics">
-                <span><i class="fa-solid fa-eye"></i> 12K</span>
-                <span><i class="fa-solid fa-heart"></i> 4.5K</span>
-              </div>
-              <div class="card-actions">
-                <button class="btn-outline-small">View Stats</button>
-              </div>
+              <!-- Published Info -->
+              <ng-container *ngIf="story.status === 'published'">
+                <div class="metrics">
+                  <span><i class="fa-solid fa-eye"></i> {{ story.views }}</span>
+                  <span><i class="fa-solid fa-heart"></i> {{ story.likes }}</span>
+                </div>
+                <div class="card-actions">
+                  <button class="btn-outline-small">View Stats</button>
+                </div>
+              </ng-container>
             </div>
           </div>
           

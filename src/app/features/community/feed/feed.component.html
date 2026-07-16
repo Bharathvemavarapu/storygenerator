@@ -12,10 +12,8 @@
   </div>
 
   <div class="masonry-grid">
-    
-    <!-- Story Card 1 -->
-    <div class="story-card large">
-      <div class="card-cover" style="background-image: url('assets/images/story-1.png');">
+    <div class="story-card" *ngFor="let story of stories" [ngClass]="story.size">
+      <div class="card-cover" [style.background-image]="'url(' + story.coverImage + ')'">
         <div class="card-overlay">
           <div class="top-actions">
             <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generated</span>
@@ -25,131 +23,19 @@
             <button class="action-btn primary" routerLink="/reader"><i class="fa-solid fa-book-open"></i> Read</button>
             <button class="action-btn"><i class="fa-solid fa-clone"></i> Remix</button>
             <button class="action-btn"><i class="fa-solid fa-share-nodes"></i> Share</button>
-            <button class="action-btn"><i class="fa-solid fa-download"></i></button>
           </div>
         </div>
       </div>
       <div class="card-info">
         <div class="meta-row">
-          <span class="genre">Sci-Fi</span>
-          <span class="read-time"><i class="fa-regular fa-clock"></i> 12m</span>
+          <span class="genre">{{ story.genre }}</span>
+          <span class="read-time"><i class="fa-regular fa-clock"></i> {{ story.readTime }}</span>
         </div>
-        <h3 class="title">The Neon Protocol</h3>
+        <h3 class="title">{{ story.title }}</h3>
         <div class="stats-row">
-          <span><i class="fa-solid fa-eye"></i> 14.2k</span>
-          <span><i class="fa-solid fa-heart"></i> 3.1k</span>
-          <span><i class="fa-solid fa-comment"></i> 482</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Story Card 2 -->
-    <div class="story-card medium">
-      <div class="card-cover" style="background-image: url('https://images.unsplash.com/photo-1534447677768-be436bb09401?q=80&w=1000&auto=format&fit=crop');">
-        <div class="card-overlay">
-          <div class="top-actions">
-            <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generated</span>
-            <button class="icon-btn favorite active" title="Favorite"><i class="fa-solid fa-heart"></i></button>
-          </div>
-          <div class="hover-actions">
-            <button class="action-btn primary" routerLink="/reader"><i class="fa-solid fa-book-open"></i> Read</button>
-            <button class="action-btn"><i class="fa-solid fa-clone"></i> Remix</button>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div class="meta-row">
-          <span class="genre">Fantasy</span>
-          <span class="read-time"><i class="fa-regular fa-clock"></i> 45m</span>
-        </div>
-        <h3 class="title">Echoes of the Forgotten Valley</h3>
-        <div class="stats-row">
-          <span><i class="fa-solid fa-eye"></i> 8.9k</span>
-          <span><i class="fa-solid fa-heart"></i> 1.2k</span>
-          <span><i class="fa-solid fa-comment"></i> 156</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Story Card 3 -->
-    <div class="story-card small">
-      <div class="card-cover" style="background-image: url('https://images.unsplash.com/photo-1618331835717-801e976710b2?q=80&w=1000&auto=format&fit=crop');">
-        <div class="card-overlay">
-          <div class="top-actions">
-            <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generated</span>
-            <button class="icon-btn favorite" title="Favorite"><i class="fa-regular fa-heart"></i></button>
-          </div>
-          <div class="hover-actions">
-            <button class="action-btn primary" routerLink="/reader"><i class="fa-solid fa-book-open"></i> Read</button>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div class="meta-row">
-          <span class="genre">Cyberpunk</span>
-          <span class="read-time"><i class="fa-regular fa-clock"></i> 5m</span>
-        </div>
-        <h3 class="title">Chrome Hearts</h3>
-        <div class="stats-row">
-          <span><i class="fa-solid fa-eye"></i> 45.1k</span>
-          <span><i class="fa-solid fa-heart"></i> 8.9k</span>
-          <span><i class="fa-solid fa-comment"></i> 1.2k</span>
-        </div>
-      </div>
-    </div>
-    
-    <!-- Story Card 4 -->
-    <div class="story-card large">
-      <div class="card-cover" style="background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af9f23?q=80&w=1000&auto=format&fit=crop');">
-        <div class="card-overlay">
-          <div class="top-actions">
-            <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generated</span>
-            <button class="icon-btn favorite" title="Favorite"><i class="fa-regular fa-heart"></i></button>
-          </div>
-          <div class="hover-actions">
-            <button class="action-btn primary" routerLink="/reader"><i class="fa-solid fa-book-open"></i> Read</button>
-            <button class="action-btn"><i class="fa-solid fa-clone"></i> Remix</button>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div class="meta-row">
-          <span class="genre">Mystery</span>
-          <span class="read-time"><i class="fa-regular fa-clock"></i> 22m</span>
-        </div>
-        <h3 class="title">The Midnight Cipher</h3>
-        <div class="stats-row">
-          <span><i class="fa-solid fa-eye"></i> 3.2k</span>
-          <span><i class="fa-solid fa-heart"></i> 804</span>
-          <span><i class="fa-solid fa-comment"></i> 92</span>
-        </div>
-      </div>
-    </div>
-
-    <!-- Story Card 5 (Telugu) -->
-    <div class="story-card medium">
-      <div class="card-cover" style="background-image: url('https://images.unsplash.com/photo-1532375810709-75b1d315ce28?q=80&w=1000&auto=format&fit=crop');">
-        <div class="card-overlay">
-          <div class="top-actions">
-            <span class="ai-badge"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Generated</span>
-            <button class="icon-btn favorite" title="Favorite"><i class="fa-regular fa-heart"></i></button>
-          </div>
-          <div class="hover-actions">
-            <button class="action-btn primary" routerLink="/reader"><i class="fa-solid fa-book-open"></i> Read</button>
-            <button class="action-btn"><i class="fa-solid fa-clone"></i> Remix</button>
-          </div>
-        </div>
-      </div>
-      <div class="card-info">
-        <div class="meta-row">
-          <span class="genre">Regional (Telugu)</span>
-          <span class="read-time"><i class="fa-regular fa-clock"></i> 18m</span>
-        </div>
-        <h3 class="title">మాయా ద్వీపం రహస్యం (Mystery of the Magic Island)</h3>
-        <div class="stats-row">
-          <span><i class="fa-solid fa-eye"></i> 12.4k</span>
-          <span><i class="fa-solid fa-heart"></i> 2.8k</span>
-          <span><i class="fa-solid fa-comment"></i> 340</span>
+          <span><i class="fa-solid fa-eye"></i> {{ story.views }}</span>
+          <span><i class="fa-solid fa-heart"></i> {{ story.likes }}</span>
+          <span><i class="fa-solid fa-comment"></i> {{ story.comments }}</span>
         </div>
       </div>
     </div>

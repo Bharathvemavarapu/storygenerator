@@ -1,1 +1,59 @@
-<p>my-stories works!</p>
+<div class="my-stories-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>My Stories</h1>
+      <p>Manage, edit, and publish your generated stories.</p>
+    </div>
+    <button class="btn-primary" routerLink="/storyboard/new">
+      <i class="fa-solid fa-plus"></i> Create New
+    </button>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn" [class.active]="activeFilter === 'all'" (click)="setFilter('all')">All Stories</button>
+    <button class="filter-btn" [class.active]="activeFilter === 'draft'" (click)="setFilter('draft')">Drafts</button>
+    <button class="filter-btn" [class.active]="activeFilter === 'published'" (click)="setFilter('published')">Published</button>
+  </div>
+
+  <div class="stories-grid">
+    <div class="story-card glass-card" *ngFor="let story of filteredStories">
+      <div class="story-cover" [style.background-image]="'url(' + story.coverImage + ')'">
+        <div class="status-badge" [ngClass]="story.status">{{ story.status === 'draft' ? 'Draft' : 'Published' }}</div>
+        
+        <div class="cover-overlay">
+          <button class="action-btn" title="Edit"><i class="fa-solid fa-pen"></i></button>
+          <button class="action-btn" title="Settings"><i class="fa-solid fa-gear"></i></button>
+          <button class="action-btn text-danger" title="Delete"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </div>
+      
+      <div class="story-details">
+        <span class="genre">{{ story.genre }}</span>
+        <h3>{{ story.title }}</h3>
+        <p class="updated">{{ story.updatedAt }}</p>
+
+        <!-- Draft specific -->
+        <ng-container *ngIf="story.status === 'draft'">
+          <div class="progress-bar">
+            <div class="progress" [style.width.%]="story.progress"></div>
+          </div>
+          <p class="progress-text">{{ story.progress }}% Complete</p>
+          <button class="btn-outline-full mt-2" routerLink="/storyboard">Continue Writing</button>
+        </ng-container>
+
+        <!-- Published specific -->
+        <ng-container *ngIf="story.status === 'published'">
+          <div class="metrics">
+            <span><i class="fa-solid fa-eye"></i> {{ story.views }}</span>
+            <span><i class="fa-solid fa-heart"></i> {{ story.likes }}</span>
+          </div>
+          <div class="card-actions-row mt-2">
+            <button class="btn-outline-full flex-1" routerLink="/reader">View</button>
+            <button class="btn-outline-full flex-1" routerLink="/dashboard/analytics">Stats</button>
+          </div>
+        </ng-container>
+
+      </div>
+    </div>
+  </div>
+</div>

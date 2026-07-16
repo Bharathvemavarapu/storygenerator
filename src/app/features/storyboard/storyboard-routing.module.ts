@@ -4,7 +4,8 @@ import { RouterModule, Routes } from '@angular/router';
 import { CanvasComponent } from './canvas/canvas.component';
 
 const routes: Routes = [
-  { path: '', component: CanvasComponent }
+  { path: '', component: CanvasComponent },
+  { path: 'new', component: CanvasComponent }
 ];
 
 @NgModule({

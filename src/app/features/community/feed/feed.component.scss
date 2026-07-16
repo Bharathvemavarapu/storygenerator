@@ -52,13 +52,12 @@
   }
 }
 
-/* Masonry Grid */
+/* Standard Grid (Sequential) */
 .masonry-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-auto-rows: 20px; /* Small base row height for granular spanning */
-  gap: 20px;
-  align-items: start;
+  gap: 24px;
+  align-items: stretch;
 }
 
 .story-card {
@@ -69,11 +68,12 @@
   transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s;
   display: flex;
   flex-direction: column;
+  min-height: 380px;
 
-  /* Varying Heights for Masonry Effect */
-  &.small { grid-row-end: span 14; }
-  &.medium { grid-row-end: span 18; }
-  &.large { grid-row-end: span 22; }
+  /* Sizes ignored for standard sequential grid */
+  &.small, &.medium, &.large { 
+    grid-row-end: auto; 
+  }
 
   &:hover {
     transform: translateY(-4px);

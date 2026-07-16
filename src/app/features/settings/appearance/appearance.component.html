@@ -1,1 +1,121 @@
-<p>appearance works!</p>
+<div class="settings-container">
+  <div class="page-header">
+    <div class="header-content">
+      <h1>Appearance Settings</h1>
+      <p>Customize the look and feel of your StoryVerse experience.</p>
+    </div>
+  </div>
+
+  <div class="settings-grid">
+    <!-- Theme Selection -->
+    <div class="setting-section glass-card">
+      <div class="section-info">
+        <h3>Interface Theme</h3>
+        <p>Select or customize your UI theme.</p>
+      </div>
+      
+      <div class="theme-options">
+        <div class="theme-card" [class.selected]="theme === 'light'" (click)="setTheme('light')">
+          <div class="theme-preview light">
+            <div class="p-header"></div>
+            <div class="p-sidebar"></div>
+            <div class="p-content"></div>
+          </div>
+          <span>Light</span>
+        </div>
+
+        <div class="theme-card" [class.selected]="theme === 'dark'" (click)="setTheme('dark')">
+          <div class="theme-preview dark">
+            <div class="p-header"></div>
+            <div class="p-sidebar"></div>
+            <div class="p-content"></div>
+          </div>
+          <span>Dark</span>
+        </div>
+
+        <div class="theme-card" [class.selected]="theme === 'system'" (click)="setTheme('system')">
+          <div class="theme-preview system">
+            <div class="p-header"></div>
+            <div class="p-sidebar"></div>
+            <div class="p-content"></div>
+          </div>
+          <span>System</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Accent Color -->
+    <div class="setting-section glass-card">
+      <div class="section-info">
+        <h3>Accent Color</h3>
+        <p>Choose your primary brand color.</p>
+      </div>
+
+      <div class="color-options">
+        <button class="color-swatch" *ngFor="let color of colors" 
+                [style.backgroundColor]="color.hex"
+                [class.active]="accentColor === color.hex"
+                (click)="setColor(color.hex)"
+                [title]="color.name">
+          <i class="fa-solid fa-check" *ngIf="accentColor === color.hex"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Typography -->
+    <div class="setting-section glass-card">
+      <div class="section-info">
+        <h3>Typography</h3>
+        <p>Adjust the base font size for the interface.</p>
+      </div>
+
+      <div class="font-options">
+        <button class="btn-outline-small" [class.active]="fontSize === 'small'" (click)="setFontSize('small')">
+          <span style="font-size: 12px;">Small</span>
+        </button>
+        <button class="btn-outline-small" [class.active]="fontSize === 'medium'" (click)="setFontSize('medium')">
+          <span style="font-size: 14px;">Medium</span>
+        </button>
+        <button class="btn-outline-small" [class.active]="fontSize === 'large'" (click)="setFontSize('large')">
+          <span style="font-size: 16px;">Large</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Accessibility -->
+    <div class="setting-section glass-card">
+      <div class="section-info">
+        <h3>Accessibility</h3>
+        <p>Enhance visibility and reduce motion.</p>
+      </div>
+
+      <div class="toggle-group">
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <h4>Reduce Motion</h4>
+            <p>Disable interface animations and transitions.</p>
+          </div>
+          <div class="switch" [class.active]="reduceMotion" (click)="toggleMotion()">
+            <div class="knob"></div>
+          </div>
+        </div>
+
+        <div class="toggle-row">
+          <div class="toggle-label">
+            <h4>High Contrast</h4>
+            <p>Increase contrast for text and interactive elements.</p>
+          </div>
+          <div class="switch" [class.active]="highContrast" (click)="toggleContrast()">
+            <div class="knob"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Save Actions -->
+    <div class="settings-actions">
+      <button class="btn-outline">Reset to Defaults</button>
+      <button class="btn-primary">Save Changes</button>
+    </div>
+  </div>
+</div>

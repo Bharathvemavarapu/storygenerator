@@ -1,8 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-const routes: Routes = [];
+import { AppearanceComponent } from './appearance/appearance.component';
 
+const routes: Routes = [
+  { path: '', component: AppearanceComponent }
+];
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]

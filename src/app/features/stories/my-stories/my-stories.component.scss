@@ -1,0 +1,226 @@
+@import 'src/app/styles/variables/colors';
+
+.my-stories-container {
+  padding: 32px 40px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.page-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 32px;
+
+  h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 8px 0;
+  }
+
+  p {
+    font-size: 15px;
+    color: $text-secondary;
+    margin: 0;
+  }
+}
+
+.filters {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 32px;
+  border-bottom: 1px solid $border-medium;
+  padding-bottom: 16px;
+
+  .filter-btn {
+    background: transparent;
+    border: none;
+    color: $text-secondary;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: all 0.2s;
+
+    &:hover {
+      background: rgba(255,255,255,0.05);
+      color: #fff;
+    }
+
+    &.active {
+      background: rgba(139, 92, 246, 0.15);
+      color: $accent-primary;
+    }
+  }
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.story-card {
+  background: $bg-secondary;
+  border: 1px solid $border-medium;
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.3);
+    border-color: rgba(255,255,255,0.1);
+
+    .cover-overlay {
+      opacity: 1;
+    }
+  }
+}
+
+.story-cover {
+  height: 160px;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  
+  .status-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 600;
+    backdrop-filter: blur(8px);
+    z-index: 2;
+    
+    &.draft { background: rgba(0,0,0,0.6); color: #fff; border: 1px solid rgba(255,255,255,0.2); }
+    &.published { background: rgba(16, 185, 129, 0.2); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.4); }
+  }
+
+  .cover-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    opacity: 0;
+    transition: opacity 0.2s;
+    backdrop-filter: blur(2px);
+    
+    .action-btn {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s;
+      
+      &:hover {
+        background: $accent-primary;
+        border-color: $accent-primary;
+        transform: scale(1.1);
+      }
+      
+      &.text-danger:hover {
+        background: #ef4444;
+        border-color: #ef4444;
+      }
+    }
+  }
+}
+
+.story-details {
+  padding: 20px;
+
+  .genre {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: $accent-primary;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: block;
+  }
+
+  h3 {
+    font-size: 18px;
+    font-weight: 700;
+    color: #fff;
+    margin: 0 0 6px 0;
+  }
+
+  .updated {
+    font-size: 12px;
+    color: $text-secondary;
+    margin: 0 0 16px 0;
+  }
+
+  .progress-bar {
+    height: 4px;
+    background: $bg-tertiary;
+    border-radius: 2px;
+    margin-bottom: 8px;
+    
+    .progress {
+      height: 100%;
+      background: linear-gradient(90deg, #8b5cf6, #3b82f6);
+      border-radius: 2px;
+    }
+  }
+
+  .progress-text {
+    font-size: 11px;
+    color: $text-secondary;
+    margin: 0;
+  }
+
+  .metrics {
+    display: flex;
+    gap: 16px;
+    font-size: 12px;
+    color: $text-secondary;
+    
+    span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+  }
+
+  .card-actions-row {
+    display: flex;
+    gap: 12px;
+  }
+
+  .mt-2 { margin-top: 16px; }
+  .flex-1 { flex: 1; }
+
+  .btn-outline-full {
+    width: 100%;
+    padding: 8px;
+    background: transparent;
+    border: 1px solid $border-medium;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    
+    &:hover {
+      background: rgba(255,255,255,0.05);
+      border-color: rgba(255,255,255,0.2);
+    }
+  }
+}
